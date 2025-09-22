@@ -35,7 +35,7 @@ def train_model(data):
     return model, X_train, X_test, y_train, y_test
 
 # Function for testing the model's performance
-def test_model(model, X_test, y_test):
+def evaluate_model(model, X_test, y_test):
     predictions = model.predict(X_test)
     acc = accuracy_score(y_test, predictions)
 
