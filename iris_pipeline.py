@@ -76,10 +76,11 @@ def plot_features(df):
     plt.show()
 
 def plot_model(model, X_test, y_test):
-    # Plot the confusion matrix for the model
-    ConfusionMatrixDisplay.from_estimator(estimator=model, X=X_test, y=y_test)
-    plt.title("Confusion Matrix")
+    disp = ConfusionMatrixDisplay.from_estimator(estimator=model, X=X_test, y=y_test)
+    fig = disp.figure_  # capture the matplotlib Figure
+    fig.suptitle("Confusion Matrix")
     plt.show()
+    return fig
 
 if __name__ == "__main__":
     iris_df = load_dataset()
