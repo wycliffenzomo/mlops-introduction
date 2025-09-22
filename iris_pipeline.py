@@ -37,9 +37,9 @@ def train_model(data):
 # Function for testing the model's performance
 def test_model(model, X_test, y_test):
     predictions = model.predict(X_test)
-    accuracy = accuracy_score(y_test, predictions)
+    acc = accuracy_score(y_test, predictions)
 
-    return accuracy
+    return acc
 
 if __name__ == "__main__": 
     iris_df = load_dataset()
