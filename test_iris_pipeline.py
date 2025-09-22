@@ -1,5 +1,12 @@
 import matplotlib.pyplot as plt
-from iris_pipeline import load_dataset, train_model, evaluate_model, plot_feature, plot_model
+from iris_pipeline import (
+    load_dataset,
+    train_model,
+    evaluate_model,
+    plot_feature,
+    plot_features,
+    plot_model,
+)
 
 def test_load_dataset():
     df = load_dataset()
