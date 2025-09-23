@@ -51,36 +51,26 @@ if __name__ == "__main__":
     acc = test_model(model, X_test, y_test)
     print(f"Accuracy: {acc:.2f}")
 
-def plot_feature(df, feature):
-    # Plot a histogram of one of the features
-    df[feature].hist()
-    plt.title(f"Distribution of {feature}")
-    plt.xlabel(feature)
-    plt.ylabel("Frequency")
-    plt.show()
+def plot_feature(df, column_name):
+    plt.figure()  
+    plt.hist(df[column_name])
+    plt.title(column_name)
+
 
 def plot_features(df):
-    # Plot scatter plot of first two features.
-    scatter = plt.scatter(
-        df["sepal length (cm)"], df["sepal width (cm)"], c=df["species"]
-    )
-    plt.title("Scatter plot of the sepal features (width vs length)")
-    plt.xlabel(xlabel="sepal length (cm)")
-    plt.ylabel(ylabel="sepal width (cm)")
-    plt.legend(
-        scatter.legend_elements()[0],
-        df["species_name"].unique(),
-        loc="lower right",
-        title="Classes",
-    )
-    plt.show()
+    plt.figure() 
+    for col in df.columns:
+        plt.hist(df[col], alpha=0.5, label=col)
+    plt.legend()
+    plt.title("Feature Histograms")
 
 def plot_model(model, X_test, y_test):
-    disp = ConfusionMatrixDisplay.from_estimator(estimator=model, X=X_test, y=y_test)
-    fig = disp.figure_  # capture the matplotlib Figure
-    fig.suptitle("Confusion Matrix")
-    plt.show()
-    return fig
+    plt.figure()  # <- ensure a figure exists
+    y_pred = model.predict(X_test)
+    plt.scatter(y_test, y_pred)
+    plt.xlabel("Actual")
+    plt.ylabel("Predicted")
+
 
 if __name__ == "__main__":
     iris_df = load_dataset()
@@ -91,4 +81,3 @@ if __name__ == "__main__":
     plot_feature(iris_df, "sepal length (cm)")
     plot_features(iris_df)
     plot_model(model, X_test, y_test)
-
